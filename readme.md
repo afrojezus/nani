@@ -54,6 +54,10 @@ Type: `string`
 
 An Anilist API query. See all the possible ones in the [Anilist documentation](https://anilist-api.readthedocs.org/en/latest/).
 
+## Related
+
+- [nani-cli](https://github.com/sotojuan/nani-cli) - CLI for this module
+
 ## License
 
 MIT © [Juan Soto](http://juansoto.me)
