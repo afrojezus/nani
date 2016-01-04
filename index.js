@@ -1,6 +1,7 @@
 'use strict';
 
 const authenticate = require('./lib/authenticate');
+const request = require('./lib/request');
 
 let nani = {
   init: function (id, secret) {
@@ -25,6 +26,18 @@ nani._authenticate = function () {
     .then(data => {
       this.authInfo.token = data.token;
       this.authInfo.expires = data.expires;
+    });
+};
+
+nani.get = function (query) {
+  return request(this.authInfo, query)
+    .catch(error => {
+      if (error.message !== 'Token does not exist or has expired') {
+        throw error;
+      } else {
+        return this._authenticate()
+          .then(() => this.get(query));
+      }
     });
 };
 
