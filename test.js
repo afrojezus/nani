@@ -3,6 +3,7 @@
 import test from 'ava';
 import nani from './';
 import authenticate from './lib/authenticate';
+import request from './lib/request';
 import {url, isExpired} from './lib/utils';
 
 const id = 'dummytest-hxdu6';
@@ -44,4 +45,54 @@ test('._authenticate resolves with good id and secret', async t => {
   await client._authenticate();
 
   t.notSame(client.authInfo.token, '');
+});
+
+test('get resolves with good token and query', async t => {
+  let client = nani.init(id, secret);
+  let anime = await client.get('anime/1');
+
+  t.same(typeof anime, 'object');
+  t.ok(anime.hasOwnProperty('id'));
+});
+
+test('get resolves with expired token and query', async t => {
+  let client = nani.init(id, secret);
+  await client._authenticate();
+
+  client.authInfo.expires -= 3600;
+
+  let anime = await client.get('anime/1');
+
+  t.same(typeof anime, 'object');
+  t.ok(anime.hasOwnProperty('id'));
+});
+
+test('request rejects with expired token', t => {
+  let authInfo = {
+    token: '1',
+    expires: 1
+  };
+
+  t.throws(request(authInfo, 'anime/1'), 'Token does not exist or has expired');
+});
+
+test('authenticate rejects with empty id and secret', t => {
+  t.throws(authenticate('', ''), 'No client ID or secret given');
+});
+
+test('._authenticate rejects with empty id and secret', t => {
+  let client = nani.init('', '');
+
+  t.throws(client._authenticate(), 'No client ID or secret given');
+});
+
+test('get rejects with bad query', async t => {
+  let client = nani.init(id, secret);
+  await client._authenticate();
+
+  return client.get('I am a bad query')
+    .catch(error => {
+      t.ok(error);
+      t.is(error.message, 'Bad query');
+    });
 });
