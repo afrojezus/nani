@@ -21,7 +21,7 @@ test('client correctly initializes', t => {
 });
 
 test('API URL is correct', t => {
-  t.is(url(), 'https://anilist.co/api/');
+  t.is(url, 'https://anilist.co/api/');
 });
 
 test('isExpired works', t => {
