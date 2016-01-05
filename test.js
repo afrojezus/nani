@@ -4,7 +4,7 @@ import test from 'ava';
 import nani from './';
 import authenticate from './lib/authenticate';
 import request from './lib/request';
-import {url, isExpired} from './lib/utils';
+import {url, isExpired, hasParam} from './lib/utils';
 
 const id = 'dummytest-hxdu6';
 const secret = 'vXhDdsfsdrHV2iWxFBsyIsbGoJA9W';
@@ -31,6 +31,11 @@ test('isExpired works', t => {
   t.ok(isExpired(Math.floor(Date.now() / 1000) - 500));
   t.notOk(isExpired(Math.floor(Date.now() / 1000) + 100));
   t.notOk(isExpired(1000000000000));
+});
+
+test('hasParam works', t => {
+  t.true(hasParam('browse/anime?season=winter'));
+  t.false(hasParam('user/1'));
 });
 
 test('authenticate resolves on good id and secret', async t => {
@@ -96,3 +101,11 @@ test('get rejects with bad query', async t => {
       t.is(error.message, 'Bad query');
     });
 });
+
+test('get resolves on query with params', async t => {
+  let client = nani.init(id, secret);
+
+  let result = await client.get('browse/anime?season=winter');
+
+  t.ok(result[0].id);
+})
