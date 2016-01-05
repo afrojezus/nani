@@ -12,10 +12,10 @@ const secret = 'vXhDdsfsdrHV2iWxFBsyIsbGoJA9W';
 test('client correctly initializes', t => {
   let client = nani.init(id, secret);
 
-  t.ok(client.hasOwnProperty('init'));
-  t.ok(client.hasOwnProperty('id'));
-  t.ok(client.hasOwnProperty('secret'));
-  t.ok(client.hasOwnProperty('authInfo'));
+  t.true(client.hasOwnProperty('init'));
+  t.true(client.hasOwnProperty('id'));
+  t.true(client.hasOwnProperty('secret'));
+  t.true(client.hasOwnProperty('authInfo'));
   t.is(client.id, id);
   t.is(client.secret, secret);
 });
@@ -25,12 +25,12 @@ test('API URL is correct', t => {
 });
 
 test('isExpired works', t => {
-  t.ok(isExpired(1));
-  t.ok(isExpired(3600));
-  t.ok(isExpired(Math.floor(Date.now() / 1000) - 600));
-  t.ok(isExpired(Math.floor(Date.now() / 1000) - 500));
-  t.notOk(isExpired(Math.floor(Date.now() / 1000) + 100));
-  t.notOk(isExpired(1000000000000));
+  t.true(isExpired(1));
+  t.true(isExpired(3600));
+  t.true(isExpired(Math.floor(Date.now() / 1000) - 600));
+  t.true(isExpired(Math.floor(Date.now() / 1000) - 500));
+  t.false(isExpired(Math.floor(Date.now() / 1000) + 100));
+  t.false(isExpired(1000000000000));
 });
 
 test('hasParam works', t => {
@@ -41,8 +41,8 @@ test('hasParam works', t => {
 test('authenticate resolves on good id and secret', async t => {
   let data = await authenticate(id, secret);
 
-  t.ok(data.hasOwnProperty('token'));
-  t.ok(data.hasOwnProperty('expires'));
+  t.true(data.hasOwnProperty('token'));
+  t.true(data.hasOwnProperty('expires'));
 });
 
 test('._authenticate resolves with good id and secret', async t => {
@@ -57,7 +57,7 @@ test('get resolves with good token and query', async t => {
   let anime = await client.get('anime/1');
 
   t.same(typeof anime, 'object');
-  t.ok(anime.hasOwnProperty('id'));
+  t.true(anime.hasOwnProperty('id'));
 });
 
 test('get resolves with expired token and query', async t => {
@@ -69,7 +69,7 @@ test('get resolves with expired token and query', async t => {
   let anime = await client.get('anime/1');
 
   t.same(typeof anime, 'object');
-  t.ok(anime.hasOwnProperty('id'));
+  t.true(anime.hasOwnProperty('id'));
 });
 
 test('request rejects with expired token', t => {
