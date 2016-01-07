@@ -18,7 +18,7 @@ let nani = {
   }
 };
 
-nani._authenticate = function () {
+nani.authenticate = function () {
   let id = this.id;
   let secret = this.secret;
 
@@ -35,7 +35,7 @@ nani.get = function (query) {
       if (error.message !== 'Token does not exist or has expired') {
         throw error;
       } else {
-        return this._authenticate()
+        return this.authenticate()
           .then(() => this.get(query));
       }
     });

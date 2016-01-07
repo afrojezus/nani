@@ -45,9 +45,9 @@ test('authenticate resolves on good id and secret', async t => {
   t.true(data.hasOwnProperty('expires'));
 });
 
-test('._authenticate resolves with good id and secret', async t => {
+test('nani.authenticate resolves with good id and secret', async t => {
   let client = nani.init(id, secret);
-  await client._authenticate();
+  await client.authenticate();
 
   t.notSame(client.authInfo.token, '');
 });
@@ -62,7 +62,7 @@ test('get resolves with good token and query', async t => {
 
 test('get resolves with expired token and query', async t => {
   let client = nani.init(id, secret);
-  await client._authenticate();
+  await client.authenticate();
 
   client.authInfo.expires -= 3300;
 
@@ -88,12 +88,12 @@ test('authenticate rejects with empty id and secret', t => {
 test('._authenticate rejects with empty id and secret', t => {
   let client = nani.init('', '');
 
-  t.throws(client._authenticate(), 'No client ID or secret given');
+  t.throws(client.authenticate(), 'No client ID or secret given');
 });
 
 test('get rejects with bad query', async t => {
   let client = nani.init(id, secret);
-  await client._authenticate();
+  await client.authenticate();
 
   return client.get('I am a bad query')
     .catch(error => {

@@ -54,6 +54,10 @@ Type: `string`
 
 An Anilist API query. See all the possible ones in the [Anilist documentation](https://anilist-api.readthedocs.org/en/latest/).
 
+### authenticate()
+
+Performs a new token request with the object's ID and secret, puts the new token in the object, and returns a promise when done. This is done automatically for you so you probably never need to call this.
+
 ## Related
 
 - [nani-cli](https://github.com/sotojuan/nani-cli) - CLI for this module
