@@ -29,7 +29,7 @@ test('isExpired works', t => {
   t.true(isExpired(3600));
   t.true(isExpired(Math.floor(Date.now() / 1000) - 600));
   t.true(isExpired(Math.floor(Date.now() / 1000) - 500));
-  t.false(isExpired(Math.floor(Date.now() / 1000) + 100));
+  t.false(isExpired(Math.floor(Date.now() / 1000) + 301));
   t.false(isExpired(1000000000000));
 });
 
@@ -64,7 +64,7 @@ test('get resolves with expired token and query', async t => {
   let client = nani.init(id, secret);
   await client._authenticate();
 
-  client.authInfo.expires -= 3600;
+  client.authInfo.expires -= 3300;
 
   let anime = await client.get('anime/1');
 
