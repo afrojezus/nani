@@ -4,7 +4,9 @@
 
 [![Build Status](https://img.shields.io/travis/sotojuan/nani.svg?style=flat-square)](https://travis-ci.org/sotojuan/nani)
 
-This is a Promise-returning Node client for the Anilist API. Aside from letting you make requests to the API it also refreshes your token automatically when it expires.
+This is a Promise-returning client for the Anilist API. Aside from letting you make requests to the API it also refreshes your token automatically when it expires.
+
+It works in both Node and the browser with a bundler like [browerify](http://browserify.org/) or [webpack](https://webpack.github.io/).
 
 ## Install
 
