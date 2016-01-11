@@ -29,7 +29,7 @@
     "api"
   ],
   "dependencies": {
-    "node-fetch": "^1.3.3"
+    "isomorphic-fetch": "^2.2.0"
   },
   "devDependencies": {
     "ava": "*",
