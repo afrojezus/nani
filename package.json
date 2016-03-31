@@ -37,7 +37,7 @@
     "ghooks": "^1.0.1",
     "semantic-release": "^4.3.5",
     "semistandard": "^7.0.4",
-    "snazzy": "^2.0.1"
+    "snazzy": "^3.0.0"
   },
   "semistandard": {
     "ignore": [
