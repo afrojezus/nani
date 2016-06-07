@@ -49,14 +49,14 @@ test('nani.authenticate resolves with good id and secret', async t => {
   let client = nani.init(id, secret);
   await client.authenticate();
 
-  t.notSame(client.authInfo.token, '');
+  t.notDeepEqual(client.authInfo.token, '');
 });
 
 test('get resolves with good token and query', async t => {
   let client = nani.init(id, secret);
   let anime = await client.get('anime/1');
 
-  t.same(typeof anime, 'object');
+  t.deepEqual(typeof anime, 'object');
   t.true(anime.hasOwnProperty('id'));
 });
 
@@ -68,7 +68,7 @@ test('get resolves with expired token and query', async t => {
 
   let anime = await client.get('anime/1');
 
-  t.same(typeof anime, 'object');
+  t.deepEqual(typeof anime, 'object');
   t.true(anime.hasOwnProperty('id'));
 });
 
@@ -97,7 +97,7 @@ test('get rejects with bad query', async t => {
 
   return client.get('I am a bad query')
     .catch(error => {
-      t.ok(error);
+      t.truthy(error);
       t.is(error.message, 'Bad query');
     });
 });
@@ -107,5 +107,5 @@ test('get resolves on query with params', async t => {
 
   let result = await client.get('browse/anime?season=winter');
 
-  t.ok(result[0].id);
+  t.truthy(result[0].id);
 })

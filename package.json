@@ -32,7 +32,7 @@
     "isomorphic-fetch": "^2.2.0"
   },
   "devDependencies": {
-    "ava": "*",
+    "ava": "^0.15.2",
     "cz-conventional-changelog": "^1.1.5",
     "ghooks": "^1.2.2",
     "semantic-release": "^4.3.5",
