@@ -34,7 +34,6 @@
   "devDependencies": {
     "ava": "^0.15.2",
     "cz-conventional-changelog": "^1.1.5",
-    "ghooks": "^1.2.2",
     "semantic-release": "^4.3.5",
     "semistandard": "^8.0.0",
     "snazzy": "^4.0.0"
@@ -47,9 +46,6 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
-    },
-    "ghooks": {
-      "pre-commit": "npm run test"
     }
   }
 }
