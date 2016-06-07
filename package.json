@@ -15,7 +15,7 @@
     "node": ">=4.2.0"
   },
   "scripts": {
-    "test": "semistandard --verbose | snazzy && NODE_ENV=test ava",
+    "test": "semistandard --verbose | snazzy && NODE_ENV=test ava --verbose",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "files": [
