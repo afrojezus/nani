@@ -34,7 +34,7 @@
   "devDependencies": {
     "ava": "^0.17.0",
     "cz-conventional-changelog": "^1.1.5",
-    "semantic-release": "^4.3.5",
+    "semantic-release": "^6.3.2",
     "semistandard": "^9.1.0",
     "snazzy": "^5.0.0"
   },
