@@ -72,23 +72,27 @@ test('get resolves with expired token and query', async t => {
   t.true(anime.hasOwnProperty('id'));
 });
 
-test('request rejects with expired token', t => {
+test('request rejects with expired token', async t => {
   let authInfo = {
     token: '1',
     expires: 1
   };
 
-  t.throws(request(authInfo, 'anime/1'), 'Token does not exist or has expired');
+  const error = await t.throws(request(authInfo, 'anime/1'));
+  t.is(error.message, 'Token does not exist or has expired');
 });
 
-test('authenticate rejects with empty id and secret', t => {
-  t.throws(authenticate('', ''), 'No client ID or secret given');
+test('authenticate rejects with empty id and secret', async t => {
+  const error = await t.throws(authenticate('', ''));
+
+  t.is(error.message, 'No client ID or secret given');
 });
 
-test('._authenticate rejects with empty id and secret', t => {
+test('._authenticate rejects with empty id and secret', async t => {
   let client = nani.init('', '');
+  const error = await t.throws(client.authenticate());
 
-  t.throws(client.authenticate(), 'No client ID or secret given');
+  t.is(error.message, 'No client ID or secret given');
 });
 
 test('get rejects with bad query', async t => {
